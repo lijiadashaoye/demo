@@ -1,0 +1,107 @@
+.waper {
+  display: flex;
+  height: 100%;
+
+}
+
+.left {
+  flex-shrink: 0;
+  height: 100%;
+  border: 1px solid rgb(224, 222, 222);
+  box-sizing: border-box
+}
+
+ul {
+  list-style: none;
+  font-size: 14px;
+}
+
+li {
+  padding: 3px 5px;
+}
+
+li:hover {
+  opacity: .8;
+}
+
+.left p {
+  cursor: pointer;
+}
+
+.first {
+  background: rgb(104, 156, 253);
+  margin-bottom: 2px
+}
+
+.first>ul {
+  padding-left: 10px;
+}
+
+.first>div {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 3px;
+}
+
+.shouqi {
+  display: flex;
+  justify-content: space-between;
+  background: rgb(83, 129, 212);
+  margin-bottom: 5px;
+  padding: 3px;
+
+}
+
+.shouqi>span {
+  display: inline-block;
+  padding: 2px 4px;
+  background: red;
+  cursor: pointer;
+}
+
+.right {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  background: url('/assets/bk.png')
+}
+
+.right>p {
+  border: 3px solid rgb(73, 121, 252);
+  padding: 0 5px;
+  background: rgb(122, 157, 252);
+}
+
+.right>div {
+  height: calc(100% - 27px);
+  position: relative;
+}
+
+
+.forNew {
+  position: absolute;
+  top: 50px;
+  left: calc(50% - 150px);
+  width: 350px;
+  height: 200px;
+  z-index: 10;
+  background: pink
+}
+
+#ele {
+  display: flex;
+  justify-content: center;
+  height: 178px;
+}
+
+.pages{
+    width:200px;
+    height:200px;
+    background: rgb(223, 191, 191)
+}
+.dragspan{
+    display: inline-block;
+    width:50px;
+    height: 50px;
+    background: red
+}

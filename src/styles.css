@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+body,
+html {
+  padding: 0;
+  margin: 0;
+  height: 100%
+}
+
+ul,
+p {
+  padding: 0;
+  margin: 0;
+}
+
+.isSpan {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: green;
+  position: absolute;
+  z-index: 3;
+  border:10px solid transparent;
+  background-clip: content-box
+}

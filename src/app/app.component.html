@@ -1,20 +1,60 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div class="waper">
 
+  <ul class="left" #left style="width:180px;">
+    <div class="shouqi" (click)="shouqi(left)">
+      <p *ngIf="!hasShouQi">
+        <span class="icon iconfont iconkaishi"></span>
+        Palette
+      </p>
+      <span *ngIf="hasShouQi" class="icon iconfont iconjiantou_xiangyouliangci"></span>
+      <span *ngIf="!hasShouQi" class="icon iconfont iconjiantou_xiangzuoliangci"></span>
+    </div>
+    <ng-container *ngIf="!hasShouQi">
+      <li *ngFor="let nav of navList" (click)="toOpen(nav)" class="first">
+        <div>
+          <p>
+
+            <span class="icon iconfont {{nav.icon}}"></span>
+            {{nav.name}}
+          </p>
+          <p>
+            <span *ngIf="!nav.open" class="icon iconfont iconxiangxiazhankai"></span>
+            <span *ngIf="nav.open" class="icon iconfont iconxiangshangshouqi"></span>
+          </p>
+        </div>
+
+        <ul *ngIf="nav.open">
+          <li *ngFor="let navChildren of nav.children">
+            <p>
+              <span class="icon iconfont {{navChildren.icon}}"></span>
+              {{navChildren.name}}</p>
+          </li>
+        </ul>
+
+      </li>
+    </ng-container>
+  </ul>
+
+  <div class="right">
+    <p>
+      <span class="icon iconfont iconkaishi"></span>
+      Process
+      <button (click)="addNew()">添加坐标</button>
+    </p>
+    <div (mouseup)="mouseupEvent($event)" (mousemove)="mousemoveEvent($event)" #huabu>
+
+      <div class="forNew" *ngIf="addNewPoint">
+
+        <label>图片：
+          <input type="file" (change)="seefile1($event)">
+          <button (click)="useIt()">确定</button>
+        </label>
+
+        <div id="ele"></div>
+      </div>
+
+      <point *ngFor="let imgUrl of pointList" [ImageData]='imgUrl' (mousedown)="mousedownEvent($event,huabu)"></point>
+      
+    </div>
+  </div>
+</div>
