@@ -65,30 +65,35 @@ export class PointComponent {
       num2 = false;   // 上边
     }
 
-    width = Math.sqrt(x * x + y * y);  // y
-
-    if (num1 && num2) {  // 右下
-      jiaodu = Math.atan(y / x)
-    } else if (!num1 && num2) {  // 左下
-      jiaodu = Math.atan(y / x)
-    } else if (num1 && !num2) {  // 右上
-      jiaodu = Math.atan(x / y)
-    } else { // 左上
-      jiaodu = Math.atan(x / y)
-    }
-    this.rotate = 180 * (jiaodu / 2);
-
-    this.lengthArr.push(this.rotate);
-
+    width = Math.sqrt(x * x + y * y);  // 
+    jiaodu = Math.atan2(y, x)
+    this.lengthArr.push(width);
     if (this.lengthArr.length > 1) {
+      if (num1 && num2) {  // 右下
+        this.rotate = jiaodu * (180 / Math.PI)
+        // console.log('右下')
+      } else if (!num1 && num2) {  // 左下
+        this.rotate = (0.5+jiaodu) * (180 / Math.PI)
+        // console.log('左下')
+      } else if (num1 && !num2) {  // 右上
+        this.rotate = (1.5+jiaodu) * (180 / Math.PI)
+        // console.log('右上')
+      } else { // 左上
+        this.rotate = (1+jiaodu) * (180 / Math.PI)
+        // console.log('左上')
+      }
+      this.rotate = jiaodu * (180 / Math.PI)
+      this.lengthArr.push(this.rotate);
+
       this.rd.setAttribute(mouse.line, 'style', `
       position:absolute;top:${mouse.top - 3}px;
       left:${mouse.left - 3}px;
-      transform:rotate(${this.lengthArr[this.lengthArr.length - 2]}deg);transform-origin: left center;
-      display:inline-block;border-top:2px solid;width:${width > 0 ? width : 0}px`);
+      transform:rotate(${this.rotate}deg);transform-origin: left center;
+      display:inline-block;border-top:2px solid;width:${this.lengthArr[this.lengthArr.length - 2]}px`);
       if (this.lengthArr.length > 100) {
         this.lengthArr = this.lengthArr.slice(99)
       }
+
     }
   }
 
