@@ -145,20 +145,20 @@ export class AppComponent {
         this.rd.setStyle(mouse.target, 'opacity', '0.01');
 
         // 创建线
-        // let line = this.rd.createElement('span');
-        // this.mouseData['down'].line = line;
-        // this.rd.appendChild(mouse.huabu, line);
+        let line = this.rd.createElement('span');
+        this.mouseData['down'].line = line;
+        this.rd.appendChild(mouse.huabu, line);
 
       }
     }
   }
   // 监听鼠标左键的抬起
-  mouseupEvent(e) {
+  mouseupEvent() {
     let mouse = this.mouseData['down'];
     if (mouse && mouse.type === 'point') {
       this.rd.setStyle(mouse.target, 'opacity', '1');
     }
-    delete this.mouseData['down']
+    delete this.mouseData['down'];
   }
   // 监听鼠标移动
   mousemoveEvent(e) {
@@ -168,45 +168,6 @@ export class AppComponent {
         let left = e.clientX - this.navWidth - mouse.offsetX;
         let top = e.clientY - this.navHeight - mouse.offsetY;
         mouse.target.style = `left:${left}px;top:${top}px;`
-      } else {
-        let left = e.clientX - this.navWidth - mouse.offsetX - 12;
-        let top = e.clientY - this.navHeight - mouse.offsetY - 12;
-
-        let num1, num2, width, jiaodu;
-
-        if (mouse.left - left > 0) {
-          num1 = false;  // 左边
-        } else {
-          num1 = true;  // 右边
-        }
-
-        if (mouse.top - top > 0) {
-          num2 = false;   // 上边
-        } else {
-          num2 = true;  // 下边
-        }
-
-        let x = Math.abs(left - mouse.left);
-        let y = Math.abs(mouse.top - top);
-        width = Math.sqrt(x * x + y * y);  // y
-        // console.log(x)
-        // console.log(y)
-        // console.log(width)
-        if (num1 && num2) {  // 右下
-          jiaodu = Math.atan(y / x)
-        } else if (!num1 && num2) {  // 左下
-          jiaodu = Math.atan(y / x)
-        } else if (num1 && !num2) {  // 右上
-          jiaodu = Math.atan(x / y)
-        } else { // 左上
-          jiaodu = Math.atan(x / y)
-        }
-        // this.rd.setAttribute(mouse.line, 'style', `
-        // position:absolute;top:${mouse.top + mouse.target.offsetWidth / 2 + 1}px;
-        // left:${mouse.left + mouse.target.offsetHeight / 2}px;
-        // transform:rotate(${180 * jiaodu / 2}deg);transform-origin: left center;
-        // display:inline-block;border-top:2px solid;width:${width > 0 ? width : 0}px`);
-
       }
     }
   }

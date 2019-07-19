@@ -41,7 +41,7 @@
       Process
       <button (click)="addNew()">添加坐标</button>
     </p>
-    <div (mouseup)="mouseupEvent($event)" (mousemove)="mousemoveEvent($event)"
+    <div (mouseup)="mouseupEvent()" (mousemove)="mousemoveEvent($event)"
       #huabu>
 
       <div class="forNew" *ngIf="addNewPoint">
