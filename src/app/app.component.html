@@ -1,6 +1,6 @@
 <div class="waper">
 
-  <ul class="left" #left style="width:180px;">
+  <ul class="left" #left>
     <div class="shouqi" (click)="shouqi(left)">
       <p *ngIf="!hasShouQi">
         <span class="icon iconfont iconkaishi"></span>
@@ -41,7 +41,8 @@
       Process
       <button (click)="addNew()">添加坐标</button>
     </p>
-    <div (mouseup)="mouseupEvent($event)" (mousemove)="mousemoveEvent($event)" #huabu>
+    <div (mouseup)="mouseupEvent($event)" (mousemove)="mousemoveEvent($event)"
+      #huabu>
 
       <div class="forNew" *ngIf="addNewPoint">
 
@@ -53,8 +54,9 @@
         <div id="ele"></div>
       </div>
 
-      <point *ngFor="let imgUrl of pointList" [ImageData]='imgUrl' (mousedown)="mousedownEvent($event,huabu)"></point>
-      
+      <point [mouseData]='mouseData' *ngFor="let imgUrl of pointList" [ImageData]='imgUrl'
+        (mousedown)="mousedownEvent($event,huabu)"></point>
+
     </div>
   </div>
 </div>

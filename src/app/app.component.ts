@@ -11,7 +11,7 @@ export class AppComponent {
   hasShouQi = false;
   mouseData = {};
   navWidth = 180;
-  navHeight = 27;
+  navHeight = 30;
   addNewPoint = false;  // 添加新坐标
   pointList = [];   // 记录有多少坐标
   upImg = '';  // 暂存选择的本地图片
@@ -132,41 +132,31 @@ export class AppComponent {
   mousedownEvent(e, huabu) {
     if (e.which === 1) {
       this.mouseData['down'] = {  // 算出当前鼠标的坐标
-        type: e.target.dataset.mark,
-        left: e.clientX - this.navWidth,
-        top: e.clientY - this.navHeight,
-        offsetX: e.offsetX,
+        type: e.target.dataset.mark,   // 记录点击的是哪个
+        left: e.clientX - this.navWidth,  // 记录被点击的元素的x
+        top: e.clientY - this.navHeight, // 记录被点击的元素的y
+        offsetX: e.offsetX, // 记录被点击的offsetX
         offsetY: e.offsetY,
         target: e.target.dataset.mark === 'wap' ? e.target.parentElement : e.target, // 被点击的元素
         huabu: huabu  // 整个画布
       }
       if (e.target.dataset.mark === 'point') {
         let mouse = this.mouseData['down'];
-        let spanPoint = this.rd.createElement('span');
-        spanPoint.className = 'isSpan';
-        // 动态更新小点坐标并隐藏原来的点
-        this.rd.setStyle(spanPoint, 'top', `${mouse.top - mouse.offsetY - 12}px`)
-        this.rd.setStyle(spanPoint, 'left', `${mouse.left - mouse.offsetX - 10}px`);
-        this.rd.setStyle(mouse.target, 'display', 'none');
-        this.mouseData['down'].copyPoint = spanPoint;
-        this.rd.appendChild(huabu, spanPoint);
+        this.rd.setStyle(mouse.target, 'opacity', '0.01');
 
         // 创建线
-        let line = this.rd.createElement('span');
-        this.mouseData['down'].line = line;
-        this.rd.appendChild(mouse.huabu, line);
+        // let line = this.rd.createElement('span');
+        // this.mouseData['down'].line = line;
+        // this.rd.appendChild(mouse.huabu, line);
 
       }
     }
-
-
   }
   // 监听鼠标左键的抬起
   mouseupEvent(e) {
     let mouse = this.mouseData['down'];
     if (mouse && mouse.type === 'point') {
-      this.rd.removeChild(mouse.huabu, mouse.copyPoint);
-      this.rd.setStyle(mouse.target, 'display', 'block');
+      this.rd.setStyle(mouse.target, 'opacity', '1');
     }
     delete this.mouseData['down']
   }
@@ -179,9 +169,8 @@ export class AppComponent {
         let top = e.clientY - this.navHeight - mouse.offsetY;
         mouse.target.style = `left:${left}px;top:${top}px;`
       } else {
-        let left = e.clientX - this.navWidth - mouse.offsetX - 10;
+        let left = e.clientX - this.navWidth - mouse.offsetX - 12;
         let top = e.clientY - this.navHeight - mouse.offsetY - 12;
-        mouse.copyPoint.style = `left:${left}px;top:${top}px;`;
 
         let num1, num2, width, jiaodu;
 
@@ -200,23 +189,23 @@ export class AppComponent {
         let x = Math.abs(left - mouse.left);
         let y = Math.abs(mouse.top - top);
         width = Math.sqrt(x * x + y * y);  // y
-        console.log(x)
-        console.log(y)
-        console.log(width)
+        // console.log(x)
+        // console.log(y)
+        // console.log(width)
         if (num1 && num2) {  // 右下
           jiaodu = Math.atan(y / x)
         } else if (!num1 && num2) {  // 左下
           jiaodu = Math.atan(y / x)
         } else if (num1 && !num2) {  // 右上
-          jiaodu = Math.atan(x / y) 
+          jiaodu = Math.atan(x / y)
         } else { // 左上
           jiaodu = Math.atan(x / y)
         }
-        this.rd.setAttribute(mouse.line, 'style', `
-        position:absolute;top:${mouse.top + mouse.target.offsetWidth / 2 + 1}px;
-        left:${mouse.left + mouse.target.offsetHeight / 2}px;
-        transform:rotate(${180*jiaodu/2}deg);transform-origin: left center;
-        display:inline-block;border-top:2px solid;width:${width > 0 ? width : 0}px`);
+        // this.rd.setAttribute(mouse.line, 'style', `
+        // position:absolute;top:${mouse.top + mouse.target.offsetWidth / 2 + 1}px;
+        // left:${mouse.left + mouse.target.offsetHeight / 2}px;
+        // transform:rotate(${180 * jiaodu / 2}deg);transform-origin: left center;
+        // display:inline-block;border-top:2px solid;width:${width > 0 ? width : 0}px`);
 
       }
     }

@@ -20,6 +20,6 @@ p {
   background: green;
   position: absolute;
   z-index: 3;
-  border:10px solid transparent;
+  border:11px solid transparent;
   background-clip: content-box
 }

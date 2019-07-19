@@ -8,7 +8,8 @@
   flex-shrink: 0;
   height: 100%;
   border: 1px solid rgb(224, 222, 222);
-  box-sizing: border-box
+  box-sizing: border-box;
+  width: 180px
 }
 
 ul {
@@ -70,6 +71,8 @@ li:hover {
   border: 3px solid rgb(73, 121, 252);
   padding: 0 5px;
   background: rgb(122, 157, 252);
+  height: 30px;
+  box-sizing: border-box
 }
 
 .right>div {
@@ -94,14 +97,14 @@ li:hover {
   height: 178px;
 }
 
-.pages{
-    width:200px;
-    height:200px;
-    background: rgb(223, 191, 191)
+.pages {
+  width: 200px;
+  height: 200px;
+  background: rgb(223, 191, 191)
 }
-.dragspan{
-    display: inline-block;
-    width:50px;
-    height: 50px;
-    background: red
+
+.dragspan {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
 }
